@@ -2,8 +2,8 @@
     font-weight: 700;
 }
 #userImage{
-    width: 230px;
-    height: 190px;
+    width: 300px;
+    height: 250px;
     border-radius: 10px;
 }
 #inza, #name{
@@ -13,19 +13,39 @@
 
     /* height: 27px;
     width: 240px; */
-    border-radius: 4px;
-    outline: none;
-    border: none;
-    outline: 1px solid gray;
-    margin-top: 10px;
+    /* border-radius: 4px; */
+    /* outline: none; */
+    /* border: none; */
+    /* outline: 1px solid gray; */
+    /* margin-top: 10px; */
 }
 a{
     text-decoration: none !important;
     
 }
+.form-control::placeholder{
+    font-size: 15px;
+}
+.form-control{
+    box-shadow: none !important;
+    /* border-color: black !important; */
+    border: 3px solid #ced4da !important;
+    /* font-size: 40px; */
+}
+.form-control:focus{
+    outline: none;
+    /* box-shadow: none; */
+    /* border-color:#ced4da !important ; */
+
+    /* border: none !important; */
+}
+.input-group{
+    width: 300px !important; 
+}
 
 #New,#Repeat{
-    margin-top: 18px;
+    /* margin-top: 18px; */
+    /* width: 100px !important; */
 }
 
 ::placeholder{
@@ -41,19 +61,7 @@ a{
 } */
 
 #Update{
-    padding: 4px;
-    padding-left: 12px;
-    padding-right: 12px;
-    border-radius: 5px;
-    height: 35px;
-   align-items: center;
-    text-align: center;
-    color: white;
-    font-weight: 600;
-    outline: none;
-    border: none;
-    margin-top: 17px;
-    background-color: rgb(99, 99, 218);
+   
 }
 
 

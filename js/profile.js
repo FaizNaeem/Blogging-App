@@ -39,10 +39,17 @@ document.getElementById("userImage").src=image
                 ${name + " " +last}`
 
             document.getElementById('change').innerHTML = `
-                <input type="password" id="old" placeholder="Old password"><br>
-                <input type="password" id="New" placeholder="New password"><br>
-                <input type="password" id="Repeat" placeholder="Repeat password"><br>
-                <button id="Update" onclick='udp("${doc.id}")'>Update password</button>
+            <div class="input-group mb-3 mt-2">
+            <input type="password"class="form-control" placeholder="Old Password" aria-label="Username" id="old" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3 mt-2">
+          <input type="password"class="form-control" placeholder="New Password" aria-label="Username" id="New" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3 mt-2">
+        <input type="password"class="form-control" placeholder="Repeat Password" aria-label="Username" id="Repeat" aria-describedby="basic-addon1">
+      </div>
+              
+                <button class="btn btn-primary" id="Update" onclick='udp("${doc.id}")'>Update password</button>
                 `
 
             let password = doc.data().password;
@@ -52,25 +59,66 @@ document.getElementById("userImage").src=image
             
             
             async function udp(e) {
-                let old = document.getElementById('old');
-                let New = document.getElementById('New');
-                let Repeat = document.getElementById('Repeat');
-                if (password == old.value) {
-                    console.log('akjfjehjfej');
-                    if (New.value == Repeat.value) {
-                        console.log('hi');
-                        alert('update successfully')
-                        location.reload()
-                                        }
-                }
-                else {
-                    console.log('akhajhj');
-                }
-                console.log(e);
-            }
 
+                let old = document.getElementById('old').value;
+                let New = document.getElementById('New').value;
+                let Repeat = document.getElementById('Repeat').value;
+                if(New==Repeat){
+
+                
+
+                const q1 = query(collection(db, "signup"), where("email", "==", user.email));
+
+                const querySnapshot1 = await getDocs(q1);
+                querySnapshot1.forEach(async (doc) => {
+                    // console.log(e);
+                    console.log(doc.data());
+                    // let old1 = doc.data().password ;
+                    // old=old1
+                    
+            try {
+                const washingtonRef = doc(db, "signup", e);
+                // console.log("hi");
+                // let old = document.getElementById('old').value;
+                // let New = document.getElementById('New').value;
+                // let Repeat = document.getElementById('Repeat').value;
+                // // Set the "capital" field of the city 'DC'
+             updateDoc(washingtonRef, {
+                NewPassword:New,
+                Repeat:Repeat
+                });
+                console.log("Document written with ID: ", e);
+           
+              } 
+              catch (h) {
+                console.error("Error adding document: ", h);
+              }
+                    // console.log(old1); 
+                });
+                
+            }
+           
+               
+            //     if (password == old.value) {
+            //         console.log('akjfjehjfej');
+            //         if (New.value == Repeat.value) {
+            //             console.log('hi');
+            //             alert('update successfully')
+            //             location.reload()
+            //                             }
+            //     }
+            //     else {
+            //         console.log('akhajhj');
+            //     }
+            //     console.log(e);
+            
+            else{
+                document.getElementById('Repeat').style.background="red"
+             
+            }
+        }
             window.udp = udp
-        
+           
         })
         // ...
     } else {
