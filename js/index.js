@@ -28,7 +28,7 @@ onAuthStateChanged(auth, async(user) => {
                 document.getElementById('name').innerHTML = `
                 <p class="fw-bold text-light m-3">${name}</p>`
 
-                const q = query(collection(db, "admin"));
+                const q = query(collection(db, "admin"), );
 
                 const querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
