@@ -38,7 +38,8 @@ onAuthStateChanged(auth, async(user) => {
                                 desc: desc.value,
                                 title: title.value,
                                 img: url,
-                                date: concat
+                                date: concat,
+                                email:user.email
                             }).then(() => {
                                 location.reload();
                             })
@@ -61,17 +62,18 @@ onAuthStateChanged(auth, async(user) => {
 
             console.log(user.email);
             const q1 = query(collection(db, "signup"), where("email", "==", user.email));
-
             const querySnapshot1 = await getDocs(q1);
             querySnapshot1.forEach(async (doc) => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data().first);
                 let name = doc.data().first
+                let id = doc.id
+                console.log(id);
 
                 document.getElementById('name').innerHTML = `
                 <p class="fw-bold text-light m-3">${name}</p>`
 
-                const q = query(collection(db, "admin"));
+                const q = query(collection(db, "admin"), where("email","==", user.email));
 
                 const querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
