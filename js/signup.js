@@ -23,7 +23,8 @@ createUserWithEmailAndPassword(auth, email, password)
     
   }
   else if(password==rpass){
-  
+  // setTimeout(()=>{
+
     const user = userCredential.user;
     // const storage = getStorage();
         const storageRef = ref(storage, user.uid);
@@ -32,6 +33,7 @@ createUserWithEmailAndPassword(auth, email, password)
     uploadBytes(storageRef, file).then((snapshot) => {
       console.log('Uploaded a blob or file!');
     });
+  // },1000)
     setTimeout(()=>{
 
       getDownloadURL(ref(storage, user.uid))
@@ -41,15 +43,16 @@ createUserWithEmailAndPassword(auth, email, password)
       // const img = document.getElementById('myimg');
       // img.setAttribute('src', url);
   
-   
-    let data={
-      first:fname,
-      last:lname,
-      password:password,
-      email:email,
-      repeat:rpass,
-       url1: url
-    }
+
+     let data={
+       first:fname,
+       last:lname,
+       password:password,
+       email:email,
+       repeat:rpass,
+        url1: url
+     }
+  
   
   
       try {
@@ -70,7 +73,7 @@ createUserWithEmailAndPassword(auth, email, password)
               }
           })
   //         setTimeout(()=>{
-  // window.location.href="../login/login.html"
+  window.location.href="../login/login.html"
   //         },2000)
       } catch (e) {
           console.error("Error adding document: ", e);

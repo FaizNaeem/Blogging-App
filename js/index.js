@@ -24,7 +24,7 @@ onAuthStateChanged(auth, async(user) => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data().first);
                 let name = doc.data().first
-
+       
                 document.getElementById('name').innerHTML = `
                 <p class="fw-bold text-light m-3">${name}</p>`
 
@@ -34,6 +34,7 @@ onAuthStateChanged(auth, async(user) => {
                 querySnapshot.forEach((doc) => {
                     // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, " => ", doc.data());
+                    // console.log(doc.data().name);
                     document.getElementById('root').innerHTML += `
                 <div class="container mt-5">
                 <div class="row">
@@ -114,15 +115,15 @@ let day = document.querySelector("#good")
 function getGreeting() {
     const currentTime = new Date();
     const currentHour = currentTime.getHours();
-
+console.log(currentHour);
     let greeting;
 
-    if (currentHour < 12) {
-        greeting = 'Good morning !';
+    if (currentHour <= 6 ||currentHour <= 24  ) {
+        greeting = 'Good night ! 😴';
     } else if (currentHour < 18) {
-        greeting = 'Good afternoon !';
-    } else {
-        greeting = 'Good evening !';
+        greeting = 'Good afternoon 🤗!';
+    } else if(currentHour<=7 || currentHour<=17){
+        greeting = 'Good morning 🥱!';
     }
 
     return greeting;

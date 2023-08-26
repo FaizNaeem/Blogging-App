@@ -74,10 +74,12 @@ onAuthStateChanged(auth, async (user) => {
                     if (old== doc.data().password) {
                         // Set the "capital" field of the city 'DC'
                         await updateDoc(washingtonRef, {
-                           NewPasswod:New,
-                           RepeatPassword:Repeat,
-                           password: New
+                           password: New,
+                           repeat:Repeat
+
                         });
+                        // alert("Password update")
+                        location.reload()
                         // console.log("hi");
                     }
                 });
@@ -130,9 +132,10 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-document.getElementById('log').addEventListener('click', () => {
+document.getElementById('inner').addEventListener('click', () => {
     signOut(auth).then(() => {
         alert('singout successfully')
+        window.location='../html/login/login.html'
     }).catch((error) => {
         // An error happened.
     });

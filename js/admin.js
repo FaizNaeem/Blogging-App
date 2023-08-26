@@ -14,14 +14,19 @@ onAuthStateChanged(auth, async(user) => {
         const uid = user.uid;
         document.getElementById('public-post').addEventListener('click', async () => {
             console.log('hello world');
-
+            const q1 = query(collection(db, "signup"), where("email", "==", user.email));
+            const querySnapshot1 = await getDocs(q1);
+            querySnapshot1.forEach(async (doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+           
             let desc = document.getElementById('description');
             let title = document.getElementById('title');
             let img = document.getElementById('image').files;
 
 
             const storageRef = ref(storage, user.uid);
-            console.log(storageRef);
+            // console.log(storageRef);
 
             // 'file' comes from the Blob or File API
             uploadBytes(storageRef, img[0]).then((snapshot) => {
@@ -33,13 +38,17 @@ onAuthStateChanged(auth, async(user) => {
                         let date1 = new Date().toTimeString()
                         let concat = date + "  " + " " + date1.slice(0, 8)
                         console.log(concat);
+                        let name = doc.data().first
+                        console.log(name);
                         try {
                             const docRef = await addDoc(collection(db, "admin"), {
                                 desc: desc.value,
                                 title: title.value,
                                 img: url,
                                 date: concat,
-                                email:user.email
+                                email:user.email,
+                                name:name
+                                
                             }).then(() => {
                                 location.reload();
                             })
@@ -54,6 +63,7 @@ onAuthStateChanged(auth, async(user) => {
                         // Handle any errors
                         console.log();
                     });
+                });
 
             });
         })
@@ -68,7 +78,7 @@ onAuthStateChanged(auth, async(user) => {
                 console.log(doc.id, " => ", doc.data().first);
                 let name = doc.data().first
                 let id = doc.id
-                console.log(id);
+                // console.log(id);
 
                 document.getElementById('name').innerHTML = `
                 <p class="fw-bold text-light m-3">${name}</p>`
@@ -159,15 +169,17 @@ onAuthStateChanged(auth, async(user) => {
         
 
     } else {
+        window.location='../html/login/login.html'
         // User is signed out
         // ...
     }
 });
 
 
-// document.getElementById('log').addEventListener('click' , ()=>{
+// document.getElementById('inner').addEventListener('click', () => {
 //     signOut(auth).then(() => {
-//        alert('singout successfully')
+//         alert('singout successfully')
+     
 //     }).catch((error) => {
 //         // An error happened.
 //     });
