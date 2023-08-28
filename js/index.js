@@ -23,10 +23,10 @@ onAuthStateChanged(auth, async(user) => {
             querySnapshot1.forEach(async (doc) => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data().first);
-                let name = doc.data().first
+                let name1 = doc.data().first
        
                 document.getElementById('name').innerHTML = `
-                <p class="fw-bold text-light m-3">${name}</p>`
+                <p class="fw-bold text-light m-3">${name1}</p>`
 
                 const q = query(collection(db, "admin"), );
 
@@ -34,7 +34,7 @@ onAuthStateChanged(auth, async(user) => {
                 querySnapshot.forEach((doc) => {
                     // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, " => ", doc.data());
-                    // console.log(doc.data().name);
+                   let name = doc.data().name;
                     document.getElementById('root').innerHTML += `
                 <div class="container mt-5">
                 <div class="row">
@@ -67,7 +67,7 @@ onAuthStateChanged(auth, async(user) => {
         querySnapshot1.forEach(async (doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data().first);
-            let name = doc.data().first
+            // let name = doc.data().first
 
             // document.getElementById('name').innerHTML = `
             // <p class="fw-bold text-light m-3">${name}</p>`
@@ -78,21 +78,27 @@ onAuthStateChanged(auth, async(user) => {
             querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
+                let name = doc.data().name;
                 document.getElementById('root').innerHTML += `
-            <div class="container mt-5">
-            <div class="row">
-            <div class="col-lg-10 blog">
-           <div class="img d-flex">
-               <img src="${doc.data().img}" alt="">
-               <div class="text">
-                   <h5 class="fw-bold">${doc.data().title}</h5>
-                   <p>${name} <span>${doc.data().date}</span></p>
-               </div>
-               </div>
-           <p class="mt-3 line">${doc.data().desc}</p>
-          </div>
-        </div>
-        </div>`
+                
+                <div class="container mt-5">
+                <div class="row">
+                <div class="col-lg-10 blog">
+                <div class="img d-flex">
+                <a href="./hi">
+                <img src="${doc.data().img}" alt="">
+                </a>
+                <div class="text">
+                <h5 class="fw-bold">${doc.data().title}</h5>
+                <p>${name} <span>${doc.data().date}</span></p>
+                </div>
+                </div>
+                <p class="mt-3 line">${doc.data().desc}</p>
+                </div>
+                </div>
+                </div>
+               
+                `
             });
 
         });
@@ -118,12 +124,12 @@ function getGreeting() {
 console.log(currentHour);
     let greeting;
 
-    if (currentHour <= 6 ||currentHour <= 24  ) {
+    if (currentHour <= 6 || currentHour>=17 ) {
         greeting = 'Good night ! 😴';
-    } else if (currentHour < 18) {
-        greeting = 'Good afternoon 🤗!';
-    } else if(currentHour<=7 || currentHour<=17){
+    } else if (currentHour>= 6 &&currentHour <= 11) {
         greeting = 'Good morning 🥱!';
+    } else {
+        greeting = 'Good afternoon 😊!';
     }
 
     return greeting;

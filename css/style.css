@@ -25,10 +25,19 @@ body{
 .blog p{
     color: gray;
 }
+.hello{
+    width: 150px;
+    padding: 0px !important;
+}
 .blog .text{
     padding-left: 12px;
 }
-
+.hi{
+    /* margin-left: 20px; */
+    /* padding: 0 !important; */
+    width: 200px !important;
+    height: 200px !important;
+}
 .blog .line{
     line-height: 25px;
     width: 100%;
