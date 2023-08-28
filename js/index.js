@@ -13,11 +13,12 @@ onAuthStateChanged(auth, async(user) => {
 
         document.getElementById('inner').innerHTML = `
         <a href="" id="log" onclick='log()'>logout</a>`
-
+// console.log(use);
+let email= user.email
         async function post() {
 
             console.log(user.email);
-            const q1 = query(collection(db, "signup"), where("email", "==", user.email));
+            const q1 = query(collection(db, "signup"),  );
 
             const querySnapshot1 = await getDocs(q1);
             querySnapshot1.forEach(async (doc) => {
@@ -26,7 +27,17 @@ onAuthStateChanged(auth, async(user) => {
                 let name1 = doc.data().first
        
                 document.getElementById('name').innerHTML = `
-                <p class="fw-bold text-light m-3">${name1}</p>`
+                <div class="btn-group dropend">
+                <button type="button" class="btn">
+                  ${name1}
+                </button>
+                <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Toggle Dropright</span>
+                </button>
+                <ul class="dropdown-menu">
+                  Dropdown menu links 
+                </ul>
+              </div>`
 
                 const q = query(collection(db, "admin"), );
 
@@ -58,9 +69,10 @@ onAuthStateChanged(auth, async(user) => {
         post()
         window.post = post
         // ...
-    } else if (!user) {
+    } 
+    else if (!user) {
         let us = user
-        console.log(us);
+        // console.log(us);
         const q1 = query(collection(db, "signup"), );
 
         const querySnapshot1 = await getDocs(q1);
@@ -120,7 +132,7 @@ let day = document.querySelector("#good")
 
 function getGreeting() {
     const currentTime = new Date();
-    const currentHour =currentTime.getHours
+    const currentHour =currentTime.getHours()
 console.log(currentHour);
     let greeting;
 
