@@ -120,7 +120,7 @@ let day = document.querySelector("#good")
 
 function getGreeting() {
     const currentTime = new Date();
-    const currentHour = currentTime.getHours();
+    const currentHour =currentTime.getHours
 console.log(currentHour);
     let greeting;
 

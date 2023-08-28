@@ -1,5 +1,5 @@
 import { auth, db, storage } from "./firebase.mjs";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
+import { onAuthStateChanged ,signOut} from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
 import { collection, addDoc, query, where, getDocs, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
 import { ref, getDownloadURL, uploadBytes, deleteObject } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-storage.js";
 
@@ -7,8 +7,33 @@ import { ref, getDownloadURL, uploadBytes, deleteObject } from "https://www.gsta
 
 onAuthStateChanged(auth, async(user) => {
     if (user) {
-        console.log(user.uid);
-        console.log(user.email);
+    //   async  function hello (){
+
+    //         const q2 = query(collection(db, "signup"), where("email", "==", user.email));
+    //         const querySnapshot2 = await getDocs(q2);
+    //         querySnapshot2.forEach(async (doc1) => {
+    //             // doc.data() is never undefined for query doc snapshots
+    //             console.log(doc1.id, " => ", doc1.data());
+    //             let name1 = doc1.data().first
+    //             console.log(name1);
+    //             //    document.getElementById("name").innerHTML=`
+    //             //    <p class="fw-bold text-light m-3">${name1}</p>`
+    //             // console.log(user.uid);
+    //             console.log(user.email);
+    //         });
+    //     }
+    //     window.hello=hello
+        document.getElementById('inner').innerHTML = `
+        <a href="" id="log" onclick='log()'>logout</a>`
+        document.getElementById('inner').addEventListener('click', () => {
+            signOut(auth).then(() => {
+                alert('singout successfully')
+                window.location.href="../../html/login/login.html"
+            }).catch((error) => {
+                console.log(error);
+                // An error happened.
+            });
+        })
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
@@ -19,7 +44,9 @@ onAuthStateChanged(auth, async(user) => {
             querySnapshot1.forEach(async (doc) => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
-           
+                let name1 = doc.data().first
+           document.getElementById("name").innerHTML=`
+           <p class="fw-bold text-light m-3">${name1}</p>`
             let desc = document.getElementById('description');
             let title = document.getElementById('title');
             let img = document.getElementById('image').files;
@@ -70,7 +97,7 @@ onAuthStateChanged(auth, async(user) => {
 
         async function post() {
 
-            console.log(user.email);
+            // console.log(user.email);
             const q1 = query(collection(db, "signup"), where("email", "==", user.email));
             const querySnapshot1 = await getDocs(q1);
             querySnapshot1.forEach(async (doc) => {
@@ -162,25 +189,17 @@ onAuthStateChanged(auth, async(user) => {
 
         window.dele = dele
 
-        document.getElementById('inner').innerHTML = `
-        <a href="" id="log">logout</a>`
+        // document.getElementById('inner').innerHTML = `
+        // <a href="" id="log">logout</a>`
 
         
         
 
     } else {
-        window.location='../html/login/login.html'
+        window.location.href='../../html/login/login.html'
         // User is signed out
         // ...
     }
 });
 
 
-// document.getElementById('inner').addEventListener('click', () => {
-//     signOut(auth).then(() => {
-//         alert('singout successfully')
-     
-//     }).catch((error) => {
-//         // An error happened.
-//     });
-// })
