@@ -72,7 +72,7 @@ console.log(email);
     } 
     else if (!user) {
         let us = user
-        // console.log(us);
+        console.log(us);
         const q1 = query(collection(db, "signup"), );
 
         const querySnapshot1 = await getDocs(q1);
